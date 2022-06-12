@@ -1,0 +1,13 @@
+<button class="btn btn-success" routerLink="new" routerLinkActive="active">
+  New Book
+</button>
+
+<hr />
+
+<ul class="list-group">
+  <app-car-list-item
+    *ngFor="let car of cars; let i = index"
+    [car]="car"
+    [index]="i"
+  ></app-car-list-item>
+</ul>

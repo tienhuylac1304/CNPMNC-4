@@ -1,0 +1,25 @@
+<div>
+  <h1>{{ car.name }}</h1>
+  <h5>{{ car.age }}</h5>
+  <h5>$ {{ car.national_id }}</h5>
+  <p>{{ car.car_name}}</p>
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" appDropdown>
+    Manage Car
+  </button>
+  <!-- show -->
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" style="cursor: pointer" routerLink="edit"
+        >Edit Car</a
+      >
+    </li>
+    <li>
+      <a class="dropdown-item" style="cursor: pointer" (click)="deleteCar()"
+        >Delete Car</a
+      >
+    </li>
+  </ul>
+</div>

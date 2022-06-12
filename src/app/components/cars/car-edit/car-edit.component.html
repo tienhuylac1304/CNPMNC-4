@@ -1,0 +1,43 @@
+<form (ngSubmit)="onSubmit()">
+  <button
+    type="submit"
+    class="btn btn-success me-1"
+    [disabled]="carForm.invalid"
+  >
+    Save
+  </button>
+  <button type="button" class="btn btn-danger" (click)="goBack()">
+    Cancel
+  </button>
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input 
+    type="text"
+    class="input-group"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="name">Image</label>
+    <input 
+    type="text"
+    class="input-group"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="description">LICENE_PLATE</label>
+    <input 
+    type="text"
+    class="input-group"
+    >
+  </div>
+  <div class="form-group">
+    <label for="description">CAR_TYPE_NAME</label>
+    <input 
+    type="text"
+    class="input-group"
+    >
+  </div>
+</form>
