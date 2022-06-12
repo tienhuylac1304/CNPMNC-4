@@ -11,8 +11,9 @@ import { Car } from '../../../shared/car.model';
   styleUrls: ['./driver-detail.component.css'],
 })
 export class DriverDetailComponent implements OnInit {
-  id!: number;
-  car!: Driver;
+  id!: string;
+  car: Driver = new Driver('', '', '', 18, '', false, '', '', '', 1);
+  tempCar!: Driver[];
   constructor(
     private carService: DriverService,
     private route: ActivatedRoute,
@@ -20,14 +21,16 @@ export class DriverDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.route.params.subscribe(async (params: Params) => {
       this.id = params['id'];
-      this.car = this.carService.getDiver(this.id);
+      this.tempCar = await this.carService.getDiver(this.id);
+      this.car = this.tempCar[0];
+      // console.log(this.car)
     });
   }
 
   deleteCar(): void {
     this.carService.deleteDriver(this.id);
-    this.router.navigate(['cars']);
+    this.router.navigate(['drivers']);
   }
 }

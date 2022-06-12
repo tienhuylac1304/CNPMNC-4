@@ -13,7 +13,7 @@ import { Driver } from 'src/app/shared/model/driver.model';
   styleUrls: ['./driver-edit.component.css'],
 })
 export class DriverEditComponent implements OnInit {
-  id!: number;
+  id!: string;
   isEditMode = false;
   driverForm!: FormGroup;
   inputModel!: Driver
@@ -27,18 +27,19 @@ export class DriverEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      this.id = params['id'];
       this.isEditMode = params['id'] != null;
 
       this.initForm();
     });
   }
 
-  private initForm() {
+  private async initForm() {
     this.inputModel = new Driver("", "", "", 18, "", false, "", "", "", 1)
     if (this.isEditMode) {
-      const driver = this.driverService.getDiver(this.id);
-      this.inputModel = driver
+      const driver = await this.driverService.getDiver(this.id);
+      console.log(driver[0])
+      this.inputModel = driver[0]
     }
     this.driverForm = new FormGroup({
       //driver
@@ -74,6 +75,7 @@ export class DriverEditComponent implements OnInit {
       this.driverService.updateDriver(this.id, this.inputModel);
     } else {
       console.log(this.driverForm.value);
+      console.log({ input: this.inputModel });
       this.driverService.addDriver(this.inputModel);
       this.driverForm.reset();
     }
