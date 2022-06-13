@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DriverService } from 'src/app/services/driver.service';
 import { Driver } from 'src/app/shared/model/driver.model';
-import { CarService } from '../../../services/car.service';
-import { Car } from '../../../shared/car.model';
+
 
 @Component({
   selector: 'app-driver-detail',
@@ -12,8 +11,7 @@ import { Car } from '../../../shared/car.model';
 })
 export class DriverDetailComponent implements OnInit {
   id!: string;
-  car: Driver = new Driver('', '', '', 18, '', false, '', '', '', 1);
-  tempCar!: Driver[];
+  driver!: Driver;
   constructor(
     private carService: DriverService,
     private route: ActivatedRoute,
@@ -23,8 +21,8 @@ export class DriverDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(async (params: Params) => {
       this.id = params['id'];
-      this.tempCar = await this.carService.getDiver(this.id);
-      this.car = this.tempCar[0];
+      let tempDriver: Driver[] = await this.carService.getDiver(this.id);
+      this.driver = tempDriver[0];
       // console.log(this.car)
     });
   }

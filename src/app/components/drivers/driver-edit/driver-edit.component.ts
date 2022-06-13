@@ -2,9 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CarService } from 'src/app/services/car.service';
 import { DriverService } from 'src/app/services/driver.service';
-import { Car } from 'src/app/shared/model/car.model';
 import { Driver } from 'src/app/shared/model/driver.model';
 
 @Component({
@@ -15,12 +13,10 @@ import { Driver } from 'src/app/shared/model/driver.model';
 export class DriverEditComponent implements OnInit {
   id!: string;
   isEditMode = false;
-  driverForm!: FormGroup;
-  inputModel!: Driver
+  driverForm!: FormGroup
 
   constructor(
     private driverService: DriverService,
-    private carService: CarService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -33,33 +29,41 @@ export class DriverEditComponent implements OnInit {
       this.initForm();
     });
   }
-
   private async initForm() {
-    this.inputModel = new Driver("", "", "", 18, "", false, "", "", "", 1)
+    let name = ""
+    let national_id = ""
+    let age = 0
+    let car_name = ""
+    let bien_so = ""
+    let seat = 0
     if (this.isEditMode) {
-      const driver = await this.driverService.getDiver(this.id);
-      console.log(driver[0])
-      this.inputModel = driver[0]
+      const driver: Driver = await this.driverService.getDiver(this.id);
+      name = driver.name
+      national_id = driver.national_id
+      age = driver.age
+      car_name = driver.car_name
+      bien_so = driver.bien_so
+      seat = driver.seat
     }
     this.driverForm = new FormGroup({
       //driver
-      name: new FormControl(this.inputModel.name, Validators.required),
-      age: new FormControl(this.inputModel.age, Validators.required),
-      national_id: new FormControl(this.inputModel.national_id, Validators.required),
+      name: new FormControl(name, Validators.required),
+      age: new FormControl(age, Validators.required),
+      national_id: new FormControl(national_id, Validators.required),
       //car
-      car_name: new FormControl(this.inputModel.car_name, Validators.required),
-      bien_so: new FormControl(this.inputModel.bien_so, Validators.required),
-      seat: new FormControl(this.inputModel.seat, Validators.required)
+      car_name: new FormControl(car_name, Validators.required),
+      bien_so: new FormControl(bien_so, Validators.required),
+      seat: new FormControl(seat, Validators.required)
     });
   }
   get name() {
     return <FormControl>this.driverForm.get('name');
   }
-  get age() {
-    return <FormControl>this.driverForm.get('age');
-  }
   get national_id() {
     return <FormControl>this.driverForm.get('national_id');
+  }
+  get age() {
+    return <FormControl>this.driverForm.get('age');
   }
   get car_name() {
     return <FormControl>this.driverForm.get('car_name');
@@ -72,11 +76,10 @@ export class DriverEditComponent implements OnInit {
   }
   onSubmit() {
     if (this.isEditMode) {
-      this.driverService.updateDriver(this.id, this.inputModel);
+      this.driverService.updateDriver(this.id, this.driverForm.value);
     } else {
       console.log(this.driverForm.value);
-      console.log({ input: this.inputModel });
-      this.driverService.addDriver(this.inputModel);
+      this.driverService.addDriver(this.driverForm.value);
       this.driverForm.reset();
     }
   }
