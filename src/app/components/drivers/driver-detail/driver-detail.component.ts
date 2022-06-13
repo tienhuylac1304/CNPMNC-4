@@ -12,7 +12,7 @@ import { Car } from '../../../shared/car.model';
 })
 export class DriverDetailComponent implements OnInit {
   id!: string;
-  car: Driver = new Driver('', '', '', 18, '', false, '', '', '', 1);
+  car: Driver = new Driver('', '', '', 18, '', false, '', '', '', '', 1);
   tempCar!: Driver[];
   constructor(
     private carService: DriverService,
@@ -30,7 +30,7 @@ export class DriverDetailComponent implements OnInit {
   }
 
   deleteCar(): void {
-    this.carService.deleteDriver(this.id);
+    this.carService.softDeleteDriver(this.id);
     this.router.navigate(['drivers']);
   }
 }

@@ -12,7 +12,9 @@ export class DriverListComponent implements OnInit {
 
   drivers: Driver[] = [];
 
-  async ngOnInit(): Promise<void> {
-    this.drivers = await this.driverService.getDrivers();
+  ngOnInit(): void {
+    this.driverService.getDrivers().subscribe(res => (this.drivers = res as Driver[]));
+
+
   }
 }

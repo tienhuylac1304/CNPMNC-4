@@ -35,11 +35,10 @@ export class DriverEditComponent implements OnInit {
   }
 
   private async initForm() {
-    this.inputModel = new Driver("", "", "", 18, "", false, "", "", "", 1)
+    this.inputModel = new Driver("", "", "", 18, "", false, "", "", "", "", 1)
     if (this.isEditMode) {
       const driver = await this.driverService.getDiver(this.id);
-      console.log(driver[0])
-      this.inputModel = driver[0]
+      driver ? this.inputModel = driver[0] : this.inputModel
     }
     this.driverForm = new FormGroup({
       //driver
@@ -72,11 +71,13 @@ export class DriverEditComponent implements OnInit {
   }
   onSubmit() {
     if (this.isEditMode) {
-      this.driverService.updateDriver(this.id, this.inputModel);
+      const newDriver = { ...this.inputModel, ...this.driverForm.value, }
+      // console.log({ newDriver })
+      this.driverService.updateDriver(this.id, newDriver);
     } else {
-      console.log(this.driverForm.value);
-      console.log({ input: this.inputModel });
-      this.driverService.addDriver(this.inputModel);
+      const newDriver = { ...this.inputModel, ...this.driverForm.value, }
+      // console.log({ input: newDriver });
+      this.driverService.addDriver(newDriver);
       this.driverForm.reset();
     }
   }

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+// import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { AngularFirestore, } from '@angular/fire/compat/firestore';
 // import { Car } from '../shared/car.model';
 import { Driver } from '../shared/model/driver.model';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -11,25 +12,17 @@ import { map, Observable } from 'rxjs';
 export class DriverService {
   drivers$!: Observable<any[]>;
   drivers: any;
-  tutorialsRef: AngularFirestoreCollection<Driver> = null as any;
-  constructor(firestore: Firestore, private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore) {
     // const driverList = collection(firestore, 'DRIVER');
     // this.drivers$ = collectionData(driverList);
-    this.drivers$ = this.afs.collection('DRIVER').valueChanges();
-    this.tutorialsRef = this.afs.collection("DRIVER");
-    //get document from collection
-    // this.drivers$.subscribe(result => console.log(result.map((item) => (item.id))));
+    this.drivers$ = this.afs.collection('DRIVER', ref => ref.orderBy('name', 'desc')).valueChanges();
   }
   getDrivers() {
-    // this.drivers$.subscribe(
-    //   result => {
-    //     result.forEach(item => {
-    //       this.drivers.push(item)
-    //     });
-    //   })
-    return new Promise<any>((resolve) => {
-      this.afs.collection('DRIVER').valueChanges({ idField: 'id' }).subscribe(users => resolve(users));
-    })
+    return this.afs.collection('DRIVER', ref => ref.where('status', '==', true)).valueChanges();
+    // return this.drivers;
+  }
+  getDriversFromRecycleBin() {
+    return this.afs.collection('DRIVER', ref => ref.where('status', '==', false)).valueChanges();
     // return this.drivers;
   }
 
@@ -40,27 +33,35 @@ export class DriverService {
   }
 
   addDriver(newDriver: Driver) {
+    const currentDate = new Date();
     newDriver.id = "1"
     newDriver.driving_status = "free"
-    newDriver.create_dt = (Date.now).toString()
+    newDriver.create_dt = formatDate(currentDate, 'dd/MM/YYYY', 'en-US')
+    const create_dt_time = formatDate(currentDate, 'hh:mm', 'en-US');
+    newDriver.create_dt_time = create_dt_time
     newDriver.status = true
-    this.drivers.push(newDriver);
+    // console.log({ newDriver: newDriver })
     this.afs.collection('DRIVER').add({ ...newDriver }).then(docRef => {
       this.afs.collection('DRIVER').doc(`${docRef.id}`).update({ ...newDriver, id: docRef.id })
     });
-
-
   }
 
   updateDriver(index: string, newDriver: Driver) {
-    this.drivers[index] = newDriver;
-    console.log(newDriver);
-    this.afs.collection('DRIVER').doc(`${this.drivers[index].id}`).update(newDriver);
+    // this.drivers[index] = newDriver;
+    // console.log(index)
+    // console.log(newDriver);
+    this.afs.collection('DRIVER').doc(index).update(newDriver);
   }
 
-  deleteDriver(index: string) {
-    this.afs.collection('DRIVER').doc(`${this.drivers[index].id}`).delete();
-    console.log(this.drivers[index].id)
-    this.drivers.splice(index, 1);
+  hardDeleteDriver(index: string) {
+    this.afs.collection('DRIVER').doc(`${index}`).delete();
+  }
+
+  softDeleteDriver(index: string) {
+    this.afs.collection('DRIVER').doc(index).update({ 'status': false });
+  }
+
+  restoreDriver(index: string) {
+    this.afs.collection('DRIVER').doc(index).update({ 'status': true });
   }
 }
