@@ -13,7 +13,7 @@ export class DriverDetailComponent implements OnInit {
   id!: string;
   car: Driver = new Driver('', '', '', 18, '', false, '', '', '', '', 1);
   tempCar!: Driver[];
-  driver?: Driver;
+  driver!: Driver;
   constructor(
     private carService: DriverService,
     private route: ActivatedRoute,
