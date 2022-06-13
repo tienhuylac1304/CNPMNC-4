@@ -22,6 +22,7 @@
       }" />
     </div>
 
+<<<<<<< HEAD
     <div class="form-group">
       <label for="age">Age</label>
       <input type="number" min="18" max="65" step="1" id="age" class="form-control" formControlName="age" [ngClass]="{
@@ -33,6 +34,30 @@
     <div class="form-group">
       <label for="car_name">Name</label>
       <input type="text" id="car_name" class="form-control" formControlName="car_name" [ngClass]="{
+=======
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input
+      type="number"
+      min="18"
+      max="65"
+      step="1"
+      id="age"
+      class="form-control"
+      formControlName="age"
+    />
+  </div>
+  <hr>
+  <h3>Car</h3>
+  <div class="form-group">
+    <label for="car_name">Name</label>
+    <input
+      type="text"
+      id="car_name"
+      class="form-control"
+      formControlName="car_name"
+      [ngClass]="{
+>>>>>>> origin/tienhuy
         'invalid-input': car_name.invalid && car_name.touched
       }" />
     </div>
