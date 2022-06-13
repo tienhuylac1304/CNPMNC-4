@@ -1,0 +1,10 @@
+<button class="btn btn-success" routerLink="new" routerLinkActive="active">
+  New Driver
+</button>
+
+<hr />
+
+<ul class="list-group">
+  <app-driver-list-item *ngFor="let driver of drivers; let i = index" [driver]="driver" [index]="i">
+  </app-driver-list-item>
+</ul>
