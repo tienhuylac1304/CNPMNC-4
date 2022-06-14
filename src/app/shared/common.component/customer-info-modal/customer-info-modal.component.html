@@ -1,0 +1,26 @@
+<div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{customer?.name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal-dialog-scrollable" *ngIf="!customer">
+            Loading...
+        </div>
+        <div class="modal-body modal-dialog-scrollable"*ngIf="customer">
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">National ID</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="customer?.national_id"/>
+            </div>
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">Age</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="customer?.age"/>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

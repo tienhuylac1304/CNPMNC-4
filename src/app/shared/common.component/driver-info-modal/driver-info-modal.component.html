@@ -1,0 +1,39 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{driver.name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal-dialog-scrollable" *ngIf="!driver">
+            Loading...
+        </div>
+        <div class="modal-body modal-dialog-scrollable"*ngIf="driver">
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">National ID</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="driver.national_id"/>
+            </div>
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">Age</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="driver.age"/>
+            </div>
+            <hr>
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">Car</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="driver.car_name"/>
+            </div>
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">License plate</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="driver.bien_so"/>
+            </div>
+            <div style="display:flex" class="my-1">
+                <label style="flex: 1;" for="name">Seat</label>
+                <input style="flex: 3;" readonly="true" type="text" id="name" class="mx-1 form-control" [value]="driver.seat"/>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

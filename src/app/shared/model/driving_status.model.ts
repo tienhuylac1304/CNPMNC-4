@@ -1,4 +1,4 @@
-export class driving_status {
+export class DrivingStatus {
     id: string
     content: string
     constructor(id: string, content: string) {

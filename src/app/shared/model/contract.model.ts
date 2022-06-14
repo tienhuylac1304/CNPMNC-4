@@ -1,34 +1,25 @@
-export class contract {
+export class Contract {
     id: string
-    customer: string
+    travel: string
     driver: string
-    from: string
-    to: string
-    create_dt: string
-    distance: number
-    price: number
+    create_date: string
+    create_time: string
     running_status: string
     status: boolean
     constructor(
         id: string,
-        customer: string,
+        travel: string,
         driver: string,
-        from: string,
-        to: string,
-        create_dt: string,
-        distance: number,
-        price: number,
+        create_date: string,
+        create_time: string,
         running_status: string,
         status: boolean
     ) {
         this.id = id
-        this.customer = customer
+        this.travel = travel
         this.driver = driver
-        this.from = from
-        this.to = to
-        this.create_dt = create_dt
-        this.distance = distance
-        this.price = price
+        this.create_date = create_date
+        this.create_time = create_time
         this.running_status = running_status
         this.status = status
     }

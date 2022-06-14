@@ -1,0 +1,9 @@
+<li [routerLink]="travel.id.toString()" routerLinkActive="active" style="cursor: pointer"
+  class="list-group-item list-group-item-action">
+      <h3>{{ customer_name }}</h3>
+      <p>{{ travel.create_date +" | "+travel.create_time }}</p>
+      <div [ngSwitch]="travel.travel_status">
+        <p style="text-align: right;color: red;" *ngSwitchCase="travel.travel_status=='Running'">{{travel.travel_status}}</p>
+        <p style="text-align: right;" *ngSwitchDefault>{{travel.travel_status}}</p>
+      </div>
+</li>

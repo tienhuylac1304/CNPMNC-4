@@ -1,0 +1,42 @@
+<div *ngIf="travel">
+  <div style="display:flex">
+    <h3>Travel</h3>
+  </div>
+    <!-- show -->
+    <div class="form-group">
+      <label for="name">Customer</label>
+      <div style="display:flex">
+        <input readonly="true" type="text" id="name" class="form-control" [value]="customer_name"/>
+        <button type="button" class="btn btn-secondary mx-2 my-1" data-bs-toggle="modal" data-bs-target="#customerModal">...</button>
+      </div>
+      <label for="name">Pick up place</label>
+        <input readonly="true" type="text" id="name" class="form-control" [value]="travel?.from"/>
+      <label for="name">Prop off place</label>
+        <input readonly="true" type="text" id="name" class="form-control" [value]="travel?.to"/>
+      <label for="national_id">Booking at</label>
+        <div style="display:flex">
+          <input  style="flex:3;text-align: center;" readonly="true" class="form-control" type="text" id="national_id" [value]="travel?.create_date" />
+          <div style="flex:1;text-align: center;">
+            :
+          </div>
+          <input  style="flex:3;text-align: center;"readonly="true" class="form-control" type="text" id="national_id" [value]="travel?.create_time" />
+        </div>
+    </div>
+    <hr>
+    <div>
+      <div style="display:flex">
+        <label  style="flex:1;text-align: center;">Price</label>
+        <div style="flex:1;text-align: center;">
+          :
+        </div>
+        <input  style="flex:6;text-align: center;"readonly="true" class="form-control" type="text" id="national_id" [value]="'$'+travel?.price" />
+      </div>
+      <div style="display:flex" class="my-1">
+        <input  style="flex:2;text-align: center;"readonly="true" class="form-control" type="text" id="national_id" [value]="travel?.travel_status" />
+      </div>
+    </div>
+      
+<div *ngIf="!travel">Loading...</div>
+<!-- Scrollable modal -->
+<customer-info-modal [cusID]="travel.customer"></customer-info-modal>
+

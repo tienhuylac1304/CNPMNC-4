@@ -1,0 +1,12 @@
+<button class="btn" style="margin-left: 10px;" (click)="handleClickRecycle()">{{isRecycle ? "List Travel": "Recycle Bin"}}</button>
+<hr />
+
+<ul class="list-group" *ngIf="isRecycle">
+  <app-travel-list-item *ngFor="let travel of travelRecycle; let i = index" [travel]="travel" [index]="i">
+  </app-travel-list-item>
+</ul>
+<ul class="list-group" *ngIf="!isRecycle">
+  <app-travel-list-item *ngFor="let travel of travels; let i = index" [travel]="travel" [index]="i">
+  </app-travel-list-item>
+</ul>
+

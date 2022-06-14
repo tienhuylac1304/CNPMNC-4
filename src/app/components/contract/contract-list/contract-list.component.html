@@ -1,0 +1,12 @@
+<button class="btn" style="margin-left: 10px;" (click)="handleClickRecycle()">{{isRecycle ? "List Contract": "Recycle Bin"}}</button>
+<hr />
+
+<ul class="list-group" *ngIf="isRecycle">
+  <app-contract-list-item *ngFor="let contract of contractRecycle; let i = index" [contract]="contract" [index]="i">
+  </app-contract-list-item>
+</ul>
+<ul class="list-group" *ngIf="!isRecycle">
+  <app-contract-list-item *ngFor="let contract of contracts; let i = index" [contract]="contract" [index]="i">
+  </app-contract-list-item>
+</ul>
+

@@ -1,0 +1,9 @@
+<li [routerLink]="contract.id.toString()" routerLinkActive="active" style="cursor: pointer"
+  class="list-group-item list-group-item-action">
+      <h3>{{ customer_name }}</h3>
+      <p>{{ contract.create_date +" | "+contract.create_time }}</p>
+      <div [ngSwitch]="contract.running_status">
+        <p style="text-align: right;color: red;" *ngSwitchCase="contract.running_status=='Running'">{{contract.running_status}}</p>
+        <p style="text-align: right;" *ngSwitchDefault>{{contract.running_status}}</p>
+      </div>
+</li>

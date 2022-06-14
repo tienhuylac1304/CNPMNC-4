@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ContractService } from 'src/app/services/contract.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { Contract } from 'src/app/shared/model/contract.model';
 import { Driver } from 'src/app/shared/model/driver.model';
-
 
 @Component({
   selector: 'app-driver-detail',
@@ -14,8 +15,10 @@ export class DriverDetailComponent implements OnInit {
   car: Driver = new Driver('', '', '', 18, '', false, '', '', '', '', 1);
   tempCar!: Driver[];
   driver?: Driver;
+  contracts: Contract[] = []
   constructor(
     private carService: DriverService,
+    private cService: ContractService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -25,12 +28,22 @@ export class DriverDetailComponent implements OnInit {
       this.id = params['id'];
       let tempDriver: Driver[] = await this.carService.getDiver(this.id);
       this.driver = tempDriver[0];
-      // console.log(this.car)
+
+      //test
+      let tempContract: Contract[] = await this.cService.getContractByDriver(this.id)
+      this.contracts = tempContract
     });
   }
 
+  restoreDriver(): void {
+    this.carService.restoreDriver(this.id)
+  }
+
   deleteCar(): void {
-    this.carService.softDeleteDriver(this.id);
+    if (this.driver?.status)
+      this.carService.softDeleteDriver(this.id);
+    else
+      this.carService.hardDeleteDriver(this.id);
     this.router.navigate(['drivers']);
   }
 }

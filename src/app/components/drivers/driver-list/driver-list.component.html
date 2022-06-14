@@ -1,10 +1,17 @@
-<button class="btn btn-success" routerLink="new" routerLinkActive="active">
-  New Driver
-</button>
-
+<div>
+  <button class="btn btn-success" routerLink="new" routerLinkActive="active">
+    New Driver
+  </button>
+  <button class="btn" style="margin-left: 10px;" (click)="handleClickRecycle()">{{isRecycle ? "List Driver": "Recycle Bin"}}</button>
+</div>
 <hr />
 
-<ul class="list-group">
+<ul class="list-group" *ngIf="isRecycle">
+  <app-driver-list-item *ngFor="let driver of driverCycleBin; let i = index" [driver]="driver" [index]="i">
+  </app-driver-list-item>
+</ul>
+<ul class="list-group" *ngIf="!isRecycle">
   <app-driver-list-item *ngFor="let driver of drivers; let i = index" [driver]="driver" [index]="i">
   </app-driver-list-item>
 </ul>
+

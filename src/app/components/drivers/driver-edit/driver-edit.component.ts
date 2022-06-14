@@ -2,9 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CarService } from 'src/app/services/car.service';
 import { DriverService } from 'src/app/services/driver.service';
-import { Car } from 'src/app/shared/model/car.model';
 import { Driver } from 'src/app/shared/model/driver.model';
 
 @Component({
@@ -20,7 +18,6 @@ export class DriverEditComponent implements OnInit {
 
   constructor(
     private driverService: DriverService,
-    private carService: CarService,
     private route: ActivatedRoute,
     private location: Location
   ) { }

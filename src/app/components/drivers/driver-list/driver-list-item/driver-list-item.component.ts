@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CarService } from 'src/app/services/car.service';
-import { Car } from 'src/app/shared/model/car.model';
 import { Driver } from 'src/app/shared/model/driver.model';
 
 @Component({
