@@ -50,5 +50,9 @@
     <li>
       <a class="dropdown-item" style="cursor: pointer" (click)="deleteCar()">Delete Car</a>
     </li>
+    <li>
+      <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#driving-his-modal">Driving History</a>
+    </li>
   </ul>
 </div>
+<driving-his-modal [contract]="contracts"></driving-his-modal>

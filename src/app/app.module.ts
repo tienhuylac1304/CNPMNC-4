@@ -17,20 +17,21 @@ import { DriverDetailComponent } from './components/drivers/driver-detail/driver
 import { DriverDetailStartComponent } from './components/drivers/driver-detail-start/driver-detail-start.component';
 import { DriverEditComponent } from './components/drivers/driver-edit/driver-edit.component';
 import { DriverService } from './services/driver.service';
-import { ContractsComponent } from './components/contract/contracts.component';
-import { ContractService } from './services/contract.service';
-import { ContractListComponent } from './components/contract/contract-list/contract-list.component';
 import { ContractListItemComponent } from './components/contract/contract-list/contract-list-item/contract-list-item.component';
 import { ContractDetailComponent } from './components/contract/contract-detail/contract-detail.component';
 import { ContractDetailStartComponent } from './components/contract/contract-detail-start/contract-detail-start.component';
-import { DriverInfoModal } from './shared/common.component/driver-info-modal/driver-info-modal.component';
 import { CusInfoModal } from './shared/common.component/customer-info-modal/customer-info-modal.component';
 import { CustomerService } from './services/customer.service';
 import { TravelService } from './services/travel.service';
+import { DrvingHisModal } from './shared/common.component/driving-his-modal/driving-his-modal.component';
+import { ContractsComponent } from './components/contract/contracts.component';
+import { ContractListComponent } from './components/contract/contract-list/contract-list.component';
 import { TravelListComponent } from './components/travel/travel-list/travel-list.component';
 import { TravelListItemComponent } from './components/travel/travel-list/travel-list-item/travel-list-item.component';
 import { TravelsComponent } from './components/travel/travels.component';
 import { TravelDetailComponent } from './components/travel/travel-detail/travel-detail.component';
+import { DriverInfoModal } from './shared/common.component/driver-info-modal/driver-info-modal.component';
+import { ContractService } from './services/contract.service';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { TravelDetailComponent } from './components/travel/travel-detail/travel-
     //Modal
     DriverInfoModal,
     CusInfoModal,
+    DrvingHisModal,
+
   ],
   imports: [
     BrowserModule,

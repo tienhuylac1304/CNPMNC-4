@@ -2,28 +2,26 @@
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{driver}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Driving History</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body modal-dialog-scrollable" *ngIf="!customer">
+        <div class="modal-body modal-dialog-scrollable" *ngIf="!contract">
             Loading...
         </div>
-        <div class="modal-body modal-dialog-scrollable"*ngIf="customer">
+        <div class="modal-body modal-dialog-scrollable"*ngIf="contract">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Date</th>
+                <th scope="col">Running status</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" >1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+              <tr *ngFor="let c of contract; let i = index">
+                <td>{{c.create_date+" : "+c.create_time}}</td>
+                <td>{{c.running_status}}</td>
+                <td>{{c.status? "Active":"Inactive"}}</td>
               </tr>
             </tbody>
           </table>
