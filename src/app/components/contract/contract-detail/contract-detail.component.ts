@@ -46,15 +46,22 @@ export class ContractDetailComponent implements OnInit {
 
   deleteCar(): void {
     if (this.contract) {
-      this.contractService.softDeleteContract(this.id);
-    }
-    else {
-      this.contractService.hardDeleteContract(this.id);
+      if (this.contract.status) {
+        this.contractService.softDeleteContract(this.id);
+        this.travelService.softDeleteTravel(this.contract.travel)
+      }
+      else {
+        this.contractService.hardDeleteContract(this.id);
+        this.travelService.hardDeleteTravel(this.contract.travel)
+      }
     }
     this.router.navigate(['contracts']);
   }
   restoreContract(): void {
-    this.contractService.restoreContract(this.id)
+    if (this.contract) {
+      this.contractService.restoreContract(this.id)
+      this.travelService.restoreTravel(this.contract?.travel)
+    }
   }
   showTravelInfo() {
     this.showingTravel = !this.showingTravel

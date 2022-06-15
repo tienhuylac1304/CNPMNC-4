@@ -58,9 +58,9 @@
       </div>
       <div style="display:flex" class="my-1">
         <div  style="flex:4;" >
-          <button class="btn btn-success"[name]="" *ngIf="!travel?.status">Restore</button>
+          <button class="btn btn-success"[name]="" *ngIf="!travel?.status" (click)="restoreContract()">Restore</button>
           <button class="btn btn-danger" *ngIf="!travel?.status" (click)="deleteCar()">Delete</button>
-          <button class="btn btn-danger" *ngIf="travel?.status">Delete</button>
+          <button class="btn btn-danger" *ngIf="travel?.status" (click)="deleteCar()">Delete</button>
         </div>
         <input  style="flex:2;text-align: center;"readonly="true" class="form-control" type="text" id="national_id" [value]="contract?.running_status" />
       </div>
